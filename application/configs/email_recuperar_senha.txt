@@ -1,0 +1,19 @@
+Prezado(a) {nome}.<br>
+<br>
+Uma nova senha foi gerada para você no sistema Digifolha.<br>
+<br>
+<b><i>Para acessar o sistema utilize os dados abaixo:</i></b><br>
+CPF: {cpf}<br>
+senha: {senha}<br>
+<br>
+Caso tenha alguma dúvida, utilize o formulário de contato na página inicial do sistema para contactar o Ipreville.<br>
+<br>
+<br>
+<br>
+Agradecemos por utilizar o Digifolha.<br>
+<br>
+<br>
+<b>Ipreville - Instituto de Previdência Social dos Servidores Públicos do Município de Joinville</b><br>
+Praça Jardim Nereu Ramos, 372 - Centro<br>
+Joinville - SC - 89.201-170<br>
+www.ipreville.sc.gov.br<br>

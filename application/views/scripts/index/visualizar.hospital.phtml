@@ -1,0 +1,160 @@
+<html>
+<head></head>
+<style>
+body {
+	font-size: 75%;
+	margin-left: 15%;
+}
+h1 {
+	text-align: center;
+	width: 80%;
+	display: block;
+	font-size: 150%;
+}
+#wrap {
+	border: 1px solid #cccccc;
+	height: 660px;
+	width: 80%;
+}
+table {
+	width: 100%;
+}
+#c table {
+	border-collapse: collapse;
+}
+#c table td {
+	text-align: center;
+	border-spacing: 0;
+ 	margin: 0;
+	font-size: 70%;
+}
+#c table td.a {
+	border: 1px solid #cccccc;
+	height: 30px;
+	border-left: none;
+}
+#c table td.z {
+	border: 1px solid #cccccc;
+	height: 30px;
+	border-left: none;
+}
+#c table td.d {
+	border: 1px solid #cccccc;
+	height: 30px;
+	border-right: none;
+}
+#c table td.c {
+	border: 1px solid #cccccc;
+	height: 30px;
+	border-right: none;
+}
+#c table td.s {
+	border: 1px solid #cccccc;
+	height: 30px;
+}
+#c table td.x {
+	border: 1px solid #cccccc;
+	height: 30px;
+}
+#a {
+	display: block;
+	height: 90px;
+	border-bottom: 1px solid #cccccc;
+}
+#b {
+	display: block;
+	height: 444px;
+}
+#c {
+	display: block;
+	height: 80px;
+}
+#a td {
+	line-height: 80%;
+}
+.left {
+	text-align: left;
+}
+.right {
+	text-align: right;
+}
+#d {
+	height: 40px;
+	padding-left: 5px;
+}
+</style>
+<body>
+<h1>EXTRATO DE PAGAMENTO</h1>
+<div id="wrap">
+	<div id="a"><table>
+			<tr>
+				<td><strong>Empresa:</strong> <?php echo $this->comprovante->nome_empresa; ?></td>
+				<td align="right"><strong>CNPJ:</strong> <?php echo $this->comprovante->cnpj; ?></td>
+			</tr>
+			<tr>
+				<td><strong>Verba:</strong> <?php echo $this->comprovante->setor; ?></td>
+				<td align="right"><strong>M&ecirc;s/Ano:</strong> <?php echo $this->comprovante->mes_referencia; ?></td>
+			</tr>
+			<tr>
+				<td><strong>Funcion&aacute;rio:</strong> <?php echo $this->comprovante->nome_funcionario; ?></td>
+				<td align="right"><strong>CPF:</strong> <?php echo $this->comprovante->cpf; ?></td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<table border="0">
+						<tr>
+							<td><strong>Reg.:</strong> <?php echo $this->comprovante->matricula; ?></td>
+							<td><strong>Cat.:</strong> <?php echo $this->comprovante->categoria_vinculo; ?></td>
+							<td><strong>Data de admiss&atilde;o:</strong> <?php echo $this->comprovante->data_admissao; ?></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2"><strong>Cargo:</strong> <?php echo $this->comprovante->funcao; ?></td>
+			</tr>
+			<tr>
+				<td colspan="2"><strong>Banco, Ag&ecirc;ncia e Conta corrente:</strong> <?php echo $this->comprovante->banco; ?> <?php echo $this->comprovante->conta_corrente; ?></td>
+			</tr>
+		</table></div>
+	<div id="b"><table>
+			<tr>
+				<th width="30">&nbsp;</th>
+				<th align="left">Descri&ccedil;&atilde;o</th>
+				<th class="right" width="30">C&oacute;d.</th>
+				<th class="right" width="40">Horas</th>
+				<th class="right" width="100">Proventos</th>
+				<th class="right" width="100">Descontos</th>
+			</tr>
+<?php foreach ($this->comprovante->ComprovanteLinha as $k): ?>
+			<tr>
+				<td class="right"><?php echo $k->codigo; ?></td>
+				<td colspan="2" class="left"><?php echo $k->descricao; ?></td>
+				<td class="right"><?php echo $k->referencia; ?></td>
+				<td class="right"><?php echo ($k->tipo == 'D' ? '' : $k->valor); ?></td>
+				<td class="right"><?php echo ($k->tipo == 'D' ? $k->valor : ''); ?></td>
+			</tr>
+<?php endforeach; ?>
+		</table></div>
+	<div id="c"><table>
+			<tr>
+				<td class="a"><strong>Sal&aacute;rio Base</strong><br /><?php echo $this->comprovante->salario_base; ?></td>
+				<td class="s"><strong>Total de Proventos</strong><br /><?php echo $this->comprovante->total_proventos; ?></td>
+				<td class="s"><strong>Total de Descontos</strong><br /><?php echo $this->comprovante->total_descontos; ?></td>
+				<td class="d"><strong>L&iacute;quido</strong><br /><?php echo $this->comprovante->liquido; ?></td>
+			</tr>
+			<tr>
+				<td class="z"><strong>Base de c&aacute;lculo F.G.T.S.</strong><br /><?php echo $this->comprovante->base_calc_fgts; ?></td>
+				<td class="x"><strong>F.G.T.S. do M&ecirc;s</strong><br /><?php echo $this->comprovante->fgts_mes; ?></td>
+				<td class="x"><strong>I.R.R.F. do M&ecirc;s</strong><br /><?php echo $this->comprovante->f_irrf; ?></td>
+				<td class="c"><strong>Contribui&ccedil;&atilde;o I.N.S.S.</strong><br /><?php echo $this->comprovante->sal_cont_inss; ?></td>
+			</tr>
+		</table></div>
+	<div id="d">
+		<?php echo $this->comprovante->mensagem_1; ?><br />
+		<?php echo $this->comprovante->mensagem_2; ?><br />
+		<?php echo $this->comprovante->mensagem_3; ?>
+	</div>
+</div>
+</body>
+</html>

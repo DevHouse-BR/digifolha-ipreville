@@ -1,0 +1,19 @@
+#pass-element, #user-element, #cpf-element, #email-element, #email-element, #emailconf-element {
+	height:25px;
+	margin-left:5px;
+}
+#user-label, #pass-label, #cpf-label, #email-label, #email-label, #emailconf-label {
+	width:50px;
+}
+#main2 {
+	margin-right:20px;
+}
+th.mes, th.empresa, th.print {
+	background:#e5e5e5 !important;
+}
+#comprovantes table tr td.mes, #comprovantes table tr td.empresa, #comprovantes table tr td.print {
+	font-size:12px;
+	padding:10px;
+color:#000000;
+border:1px solid #CCCCCC;
+}

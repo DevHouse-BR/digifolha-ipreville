@@ -1,0 +1,83 @@
+<?php $this->headLink()->appendStylesheet($this->baseUrl() . '/css/ext-all.css'); ?>
+<?php $this->headLink()->appendStylesheet($this->baseUrl() . '/css/xtheme-gray.css'); ?>
+<?php $this->headScript()->appendFile($this->baseUrl() . '/js/ext-base.js'); ?>
+<?php $this->headScript()->appendFile($this->baseUrl() . '/js/ext-all.js'); ?>
+<?php $this->headScript()->appendFile($this->baseUrl() . '/js/ext-pt_BR.js'); ?>
+<?php $this->headScript()->appendFile($this->baseUrl() . '/js/datetime.js'); ?>
+<?php $this->headScript()->captureStart(); ?>
+Ext.onReady(function() {
+	Ext.QuickTips.init();
+	Ext.form.Field.prototype.msgTarget = 'side';
+	Ext.apply(Ext.form.VTypes, {
+		password : function(val, field) {
+			if (field.initialPassField) {
+				var login = Ext.getCmp(field.initialPassField);
+	            return (val == login.getValue());
+	        }
+	        return true;
+	    },
+	    passwordText : 'As senhas precisam ser iguais'
+	});
+	var form = new Ext.form.FormPanel({
+		url: '<?php echo $this->url(array('module' => 'admin', 'controller' => 'index', 'action' => 'alterar-senha'), null, true); ?>',
+		renderTo: 'form-senha',
+		width: 375,
+		layout: 'form',
+		bodyStyle: 'padding: 5px',
+		title: 'Trocar senha',
+		defaults: {
+			xtype: 'textfield',
+			width: 238,
+			allowBlank: false,
+			inputType: 'password'
+		},
+		items: [{
+			name: 'senha_antiga',
+			fieldLabel: 'Senha antiga'
+		}, {
+			name: 'senha_nova1',
+			id: 'senha_nova1',
+			fieldLabel: 'Senha nova'
+		}, {
+			name: 'senha_nova2',
+			id: 'senha_nova2',
+			fieldLabel: 'Senha nova (confirmar)',
+			vtype: 'password',
+			initialPassField: 'senha_nova1'
+		}],
+		bbar: ['->', {
+			xtype: 'button',
+			text: 'Salvar',
+			scope: this,
+			iconCls: 'icon-save',
+			handler: function () {
+				if (!form.form.isValid()) {
+					return false;
+				}
+				form.form.submit({
+					method: 'POST',
+					success: function () {
+						Ext.MessageBox.show({
+							title: 'Atenção',
+							msg: 'A senha foi alterada com sucesso',
+							buttons: Ext.MessageBox.OK,
+							fn: function () {
+								form.form.reset();
+							}
+						});
+					},
+					failure: function (a, b) {
+						Ext.MessageBox.show({
+							title: 'Atenção',
+							msg: b.result.error,
+							buttons: Ext.MessageBox.OK
+						});
+					}
+				});
+			}
+		}]
+	});
+});
+<?php $this->headScript()->captureEnd(); ?>
+
+<div id="form-senha"></div>

@@ -1,0 +1,182 @@
+<html>
+<head></head>
+<style>
+body {
+	font-size: 70%;
+	margin-left: 15%;
+	font-family: Helvetica;
+}
+h1 {
+	text-align: center;
+	width: 80%;
+	display: block;
+	font-size: 150%;
+	margin-bottom:2px;
+}
+#wrap {
+	border: 1px solid #cccccc;
+	height: 660px;
+	width: 80%;
+}
+table {
+	width: 100%;
+}
+#c table {
+	border-collapse: collapse;
+}
+#c table td {
+	text-align: center;
+	border-spacing: 0;
+ 	margin: 0;
+	font-size: 70%;
+}
+#c table td.a {
+	border: 1px solid #cccccc;
+	height: 30px;
+	border-left: none;
+}
+#c table td.z {
+	border: 1px solid #cccccc;
+	height: 30px;
+	border-left: none;
+}
+#c table td.d {
+	border: 1px solid #cccccc;
+	height: 30px;
+	border-right: none;
+}
+#c table td.c {
+	border: 1px solid #cccccc;
+	height: 30px;
+	border-right: none;
+}
+#c table td.s {
+	border: 1px solid #cccccc;
+	height: 30px;
+}
+#c table td.x {
+	border: 1px solid #cccccc;
+	height: 30px;
+}
+#a {
+	display: block;
+	height: 86px;
+	border-bottom: 1px solid #cccccc;
+}
+#b {
+	display: block;
+	height: 444px;
+	background-image: url("http://<?php echo ($_SERVER['HTTP_HOST'] . $this->BaseUrl()); ?>/images/prefeitura-brasao.jpg");
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+#c {
+	display: block;
+	height: 80px;
+}
+#a td {
+	line-height: 80%;
+	font-size:68%;
+	font-weight: bold;
+}
+.left {
+	text-align: left;
+}
+.right {
+	text-align: right;
+}
+#d {
+	height: 40px;
+	padding-left: 5px;
+}
+span.espacador{
+	margin-right:20px;
+}
+.cabecalho_tabela{
+	border-bottom: solid 1px #cccccc;
+}
+div.valores{
+	font-weight: bold;
+	text-align: center;
+}
+</style>
+<body>
+<h1>EXTRATO DE PAGAMENTO</h1>
+<div id="wrap">
+	<div id="a">
+		<table>
+			<tr>
+				<td><strong>Empresa:</strong> <?php echo $this->comprovante->nome_empresa; ?></td>
+				<td align="right"><strong>CNPJ:</strong> <?php echo $this->comprovante->cnpj; ?></td>
+			</tr>
+			<tr>
+				<td><strong>Verba:</strong> <?php echo $this->comprovante->setor; ?></td>
+				<td align="right"><strong>M&ecirc;s/Ano:</strong> <?php echo $this->comprovante->mes_referencia; ?></td>
+			</tr>
+			<tr>
+				<td><strong>Funcion&aacute;rio:</strong> <?php echo $this->comprovante->nome_funcionario; ?></td>
+				<td align="right"><strong>CPF:</strong> <?php echo $this->comprovante->cpf; ?></td>
+			</tr>
+			<tr>
+				<td colspan="2" align="left">
+					Reg.: <?php echo $this->comprovante->matricula; ?><span class="espacador"> </span>
+					Cat.: <?php echo $this->comprovante->categoria_vinculo; ?><span class="espacador"> </span>
+					Data de admiss&atilde;o: <?php echo $this->comprovante->data_admissao; ?>
+				</td>
+			</tr>
+			<tr>
+				<td><strong>Cargo:</strong> <?php echo $this->comprovante->funcao; ?></td>
+				<td align="right"><strong>Padr&atilde;o:</strong> <?php echo $this->comprovante->nivel_salarial; ?></td>
+			</tr>
+			<tr>
+				<td><strong>Banco, Ag&ecirc;ncia e Conta corrente:</strong> <?php echo $this->comprovante->banco; ?><span class="espacador"> </span><?php echo $this->comprovante->conta_corrente; ?></td>
+				<td align="right"><strong>Valor Hora:</strong> <?php echo $this->comprovante->salario_hora; ?></td>
+			</tr>
+		</table>
+	</div>
+	<div id="b">
+		<table class="cabecalho_tabela">
+			<tr>
+				<th width="16%" colspan="3">&nbsp;</th>
+				<th align="33%">Descri&ccedil;&atilde;o</th>
+				<th width="17%">C&oacute;d. Horas</th>
+				<th width="17%">Proventos</th>
+				<th width="17%">Descontos</th>
+			</tr>
+		</table>
+		<table>
+<?php foreach ($this->comprovante->ComprovanteLinha as $k): ?>
+			<tr>
+				<td width="8%" align="center"><?php echo str_pad($k->codigo, 3, "0", STR_PAD_LEFT); ?></td>
+				<td width="41%" class="left"><?php echo $k->descricao; ?></td>
+				<td width="17%" align="center"><?php echo $k->referencia; ?></td>
+				<td width="17%" class="right"><?php echo ($k->tipo == 'D' ? '' : $k->valor); ?></td>
+				<td width="17%" class="right"><?php echo ($k->tipo == 'D' ? $k->valor : ''); ?></td>
+			</tr>
+<?php endforeach; ?>
+		</table>
+	</div>
+	<div id="c">
+		<table>
+			<tr>
+				<td align="left" class="a">Sal&aacute;rio Base<div class="valores"><?php echo $this->comprovante->salario_base; ?></div></td>
+				<td align="left" class="s">Total de Proventos<div class="valores"><?php echo $this->comprovante->total_proventos; ?></div></td>
+				<td align="left" class="s">Total de Descontos<div class="valores"><?php echo $this->comprovante->total_descontos; ?></div></td>
+				<td align="left" class="d">L&iacute;quido<div class="valores"><?php echo $this->comprovante->liquido; ?></div></td>
+			</tr>
+			<tr>
+				<td align="left" class="z">Base de c&aacute;lculo F.G.T.S.<div class="valores"><?php echo $this->comprovante->base_calc_fgts; ?></div></td>
+				<td align="left" class="x">F.G.T.S. do M&ecirc;s<div class="valores"><?php echo $this->comprovante->fgts_mes; ?></div></td>
+				<td align="left" class="x">Base para Consignados<div class="valores"><?php echo $this->comprovante->base_consignados; ?></div></td>
+				<td align="left" class="c">Contribui&ccedil;&atilde;o I.N.S.S.<div class="valores"><?php echo $this->comprovante->sal_cont_inss; ?></div></td>
+			</tr>
+		</table>
+	</div>
+	<div id="d">
+		<?php echo $this->comprovante->mensagem_1; ?><br />
+		<strong><?php echo $this->comprovante->mensagem_2; ?></strong><br />
+		<?php echo $this->comprovante->mensagem_3; ?>
+	</div>
+</div>
+</body>
+</html>

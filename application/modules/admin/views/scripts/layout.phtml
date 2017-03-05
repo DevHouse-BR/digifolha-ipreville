@@ -1,0 +1,100 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title><?php echo $this->layout()->title; ?></title>
+<?php echo $this->headMeta() ?>
+<?php echo $this->headLink() ?>
+<?php echo $this->headScript(); ?>
+<?php echo $this->headStyle(); ?>
+<link rel="stylesheet" href="<?php echo $this->baseUrl() . '/css/default.css'; ?>" />
+<!--[if lte IE 6]>
+<link href="<?php echo $this->baseUrl() . '/css/ie6.css'; ?>" rel="stylesheet" type="text/css" />
+<![endif]-->
+</head>
+<body>
+<div id="tudo">
+	<div id="wrap">
+		<div class="header">
+			<div class="header_left">
+				<div class="ipreville"><a href="http://www.ipreville.sc.gov.br/" target="_blank"><img src="<?php echo $this->baseUrl(); ?>/images/logo_ipreville.jpg" alt="Ipreville" border="0" /></a></div>
+				<div class="jlle"><a href="http://www.joinville.sc.gov.br/" target="_blank"><img src="<?php echo $this->baseUrl(); ?>/images/pref_jlle.jpg" border="0" alt="Prefeitura de Joinville" /></a></div>
+			</div>
+			<div class="header_center">
+				<div class="center">
+					<div class="digifolha"><img src="<?php echo $this->baseUrl(); ?>/images/logodigifolha.png" alt="Digifolha" /></div>
+					<div class="sistema"><img src="<?php echo $this->baseUrl(); ?>/images/sistema.jpg" alt="Sistema Ipreville" /></div>
+				</div>
+			</div>
+			<div class="header_right">
+				Suporte ao Servidor<br />
+			</div>
+		</div>
+		<div class="clearfloat"></div>
+		<div class="welcome">
+			<div class="welcome_bg_r">
+				<div id="tbar">
+					<div id="tbar_left">
+						<p>Olá <span class="b"><?php echo Zend_Registry::get('auth')->getIdentity()->nome; ?></span>. <a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'index', 'action' => 'logout'), null, true); ?>">Sair</a></p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="main_content">
+			<div id="left">
+				<div class="menu_left">
+					<div class="menu_left_top">
+						<?php if (Zend_Registry::get('auth')->hasIdentity()): ?>
+						<ul>
+							<li class="mainmenu"><a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'index', 'action' => 'index'), null, true); ?>">Início</a></li>
+							<li class="mainmenu"><a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'mensagem', 'action' => 'index'), null, true); ?>">Mensagens</a></li>
+							<li class="mainmenu"><a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'configuracao', 'action' => 'aniversario'), null, true); ?>">Msg. Aniversário</a></li>
+							<li class="mainmenu"><a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'index', 'action' => 'arquivo'), null, true); ?>">Postagens</a></li>
+							<li class="mainmenu"><a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'ente', 'action' => 'index'), null, true); ?>">Cad. de Entes</a></li>
+							<li class="mainmenu"><a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'index', 'action' => 'senha'), null, true); ?>">Trocar senha</a></li>
+							<li class="mainmenu"><a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'configuracao', 'action' => 'alteraremail'), null, true); ?>">Trocar Email</a></li>
+							<li class="mainmenu"><a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'index', 'action' => 'logout'), null, true); ?>">Sair</a></li>
+						</ul>
+						<div class="clearfloat"></div>
+						<?php endif; ?>
+					</div>
+				</div>
+			</div>
+			<div id="main">
+				<div class="cont-1">
+					<div class="cont-2">
+						<div class="cont-3">
+							<div class="content">
+								<div class="login_2">
+									<?php if (count($this->layout()->messages)): ?>
+									<div id="messages">
+									<?php foreach ($this->layout()->messages as $k): ?>
+										<p><?php echo $k; ?></p>
+									<?php endforeach; ?>
+									</div>
+									<?php endif; ?>
+									<?php echo $this->layout()->content; ?>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="clearfloat"></div>
+	</div>
+	<div id="footer">
+		<div id="footer_left"></div>
+		<div class="footer_center">
+			Ipreville - Instituto de Previdência Social dos Servidores Públicos do Município de Joinville - Órgão integrante da Prefeitura Municipal - Praça Nereu Ramos, 372, Centro - Joinville/SC - CEP: 89.201-170 - Fone: (47) 3423-1900 - ipreville@ipreville.sc.gov.br - <a href="http://www.ipreville.sc.gov.br/" target="_blank">www.ipreville.sc.gov.br</a>
+		</div>
+		<div class="copyright">
+			<p>
+				Desenvolvido por <a href="http://www.dmgdigital.com.br" target="_blank" class="linkCopyright">DMG Digital</a>
+			</p>
+		</div>
+		<div id="footer_right"></div>
+	</div>
+	<div class="clearfloat"></div>	
+</div>
+</body>
+</html>

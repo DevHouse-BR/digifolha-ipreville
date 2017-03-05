@@ -1,0 +1,25 @@
+MensagemServidorLeitura:
+  options:
+    collate: utf8_unicode_ci
+    charset: utf8
+  tableName: mensagem_servidor_leitura
+  columns:
+    mensagem_id:
+      type: integer(8)
+      unsigned: true
+      primary: true
+      notnull: true
+    servidor_publico_id:
+      type: integer(8)
+      unsigned: true
+      primary: true
+      notnull: true
+  relations:
+    Mensagem:
+      local: mensagem_id
+      foreign: id
+      type: one
+    ServidorPublico:
+      local: servidor_publico_id
+      foreign: id
+      type: one

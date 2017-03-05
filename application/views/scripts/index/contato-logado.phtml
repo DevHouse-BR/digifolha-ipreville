@@ -1,0 +1,33 @@
+<?php if ($this->aniversario): ?>
+
+<div id="aniversario">
+		<div class="aniversario_top">
+			<div class="aniversario_btn">
+			<div class="gift">
+			<h3><?php echo DMG_Config::_(1); ?></h3>
+			<p><?php echo DMG_Config::_(2); ?></p></div>
+		</div>
+	</div>
+</div>
+<?php endif; ?>
+<?php
+	$endereco = $_SERVER ['REQUEST_URI'];
+	$registro = substr($endereco,(strlen($endereco)-2),strlen($endereco));
+	
+	if($registro == "sa"){ 
+		$tituloMensagem = "Solicitar Simula&ccedil;&atilde;o de Aposentadoria";
+	}else{
+		$tituloMensagem = "Suporte ao Servidor";
+	}
+	
+?>
+<div id="contato">
+<div id="msgs_btn_contato">
+	<h3> <?php echo $tituloMensagem ?></h3>
+	<?php echo $this->form; ?>
+	<?php if (count($this->messages)): ?>
+		<p class="erro"><?php echo $this->messages[0]; ?></p>
+	<?php endif; ?>
+	<a href="<?php echo $this->url(array('module' => 'default', 'controller' => 'index', 'action' => 'login'), null, true); ?>" class="login_links">Voltar</a>
+</div>
+</div>

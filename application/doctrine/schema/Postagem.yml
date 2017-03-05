@@ -1,0 +1,38 @@
+Postagem:
+  options:
+    collate: utf8_unicode_ci
+    charset: utf8
+  tableName: postagem
+  columns:
+    id:
+      type: integer(8)
+      unsigned: true
+      primary: true
+      autoincrement: true
+    ente_id:
+      type: integer(4)
+      unsigned: true
+      notnull: true
+    periodo:
+      type: string(255)
+      notnull: true
+    arquivo_postado:
+      type: string(255)
+      notnull: true
+    dt_postagem:
+      type: timestamp
+      notnull: true
+    ip_origem:
+      type: string(255)
+      notnull: true
+    fl_publicado:
+      type: boolean
+      notnull: true
+    fl_processado:
+      type: boolean
+      notnull: true
+  relations:
+    Ente:
+      local: ente_id
+      foreign: id
+      type: one

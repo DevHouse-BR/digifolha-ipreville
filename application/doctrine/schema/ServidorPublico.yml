@@ -1,0 +1,40 @@
+ServidorPublico:
+  options:
+    collate: utf8_unicode_ci
+    charset: utf8
+  tableName: servidor_publico
+  columns:
+    id:
+      type: integer(8)
+      unsigned: true
+      primary: true
+      autoincrement: true
+    nome:
+      type: string(255)
+      notnull: true
+    cpf:
+      type: string(255)
+      unique: true
+      notnull: true
+    senha:
+      type: string(255)
+      notnull: true
+    email:
+      type: string(255)
+      notnull: true
+    fl_ativo:
+      type: boolean(1)
+      notnull: true
+    dt_ativacao:
+      type: timestamp
+      notnull: false
+    ip_origem:
+      type: string(255)
+      notnull: false
+    tipo_servidor:
+      type: string(255)
+      notnull: true
+    data_nascimento:
+      type: timestamp
+      notnull: false
+      

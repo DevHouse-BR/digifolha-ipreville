@@ -1,0 +1,48 @@
+Mensagem:
+  options:
+    collate: utf8_unicode_ci
+    charset: utf8
+  tableName: mensagem
+  columns:
+    id:
+      type: integer(8)
+      autoincrement: true
+      unsigned: true
+      primary: true
+    usuario_admin_id:
+      type: integer(4)
+      unsigned: true
+      notnull: true
+    titulo:
+      type: string(255)
+      notnull: true
+    mensagem:
+      type: clob
+      notnull: true
+    data_criacao:
+      type: timestamp(25)
+      notnull: true
+    data_publicacao:
+      type: timestamp(25)
+      notnull: false
+    data_expiracao:
+      type: timestamp(25)
+      notnull: false
+    fl_publicada:
+      type: boolean(1)
+      notnull: true
+    fl_ativos:
+      type: boolean(1)
+      notnull: true
+    fl_inativos:
+      type: boolean(1)
+      notnull: true
+  relations:
+    UsuarioAdmin:
+      local: usuario_admin_id
+      foreign: id
+      type: one
+    MensagemServidorLeitura:
+      local: id
+      foreign: mensagem_id
+      type: many

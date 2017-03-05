@@ -1,0 +1,16 @@
+Parametro:
+  options:
+    collate: utf8_unicode_ci
+    charset: utf8
+  tableName: parametro
+  columns:
+    id:
+      type: integer(4)
+      unsigned: true
+      primary: true
+    nome:
+      type: string(255)
+      notnull: true
+    valor:
+      type: string(255)
+      notnull: true

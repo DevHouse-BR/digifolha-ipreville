@@ -1,0 +1,172 @@
+<html>
+<head></head>
+<style>
+body {
+	font-size: 60%;
+	margin-left: 15%;
+	font-family: Helvetica;
+}
+h1 {
+	text-align: center;
+	width: 80%;
+	display: block;
+	font-size: 110%;
+	margin-bottom:0px;
+}
+#wrap {
+	border: 1px solid #cccccc;
+	/*height: 550px;*/
+	width: 80%;
+}
+table {
+	width: 100%;
+}
+#c table {
+	border-collapse: collapse;
+}
+#c table td {
+	text-align: center;
+	border-spacing: 0;
+ 	margin: 0;
+	font-size: 70%;
+}
+#c table td.a {
+	border: 1px solid #cccccc;
+	height: 30px;
+	border-left: none;
+}
+#c table td.z {
+	border: 1px solid #cccccc;
+	height: 30px;
+	border-left: none;
+}
+#c table td.d {
+	border: 1px solid #cccccc;
+	height: 30px;
+	border-right: none;
+}
+#c table td.c {
+	border: 1px solid #cccccc;
+	height: 30px;
+	border-right: none;
+}
+#c table td.s {
+	border: 1px solid #cccccc;
+	height: 30px;
+}
+#c table td.x {
+	border: 1px solid #cccccc;
+	height: 30px;
+}
+#a {
+	display: block;
+	height: 54px;
+	border-bottom: 1px solid #cccccc;
+}
+#b {
+	display: block;
+	height: 444px;
+}
+#c {
+	display: block;
+	height: 38px;
+}
+#a td {
+	line-height: 80%;
+}
+.left {
+	text-align: left;
+}
+.right {
+	text-align: right;
+}
+#d {
+	height: 46px;
+	padding-left: 5px;
+}
+.cabecalho_tabela{
+	border-bottom: solid 1px #cccccc;
+}
+#tabela_dados{
+	font-family: Courier;
+}
+#empresa{
+	font-size: 76%;
+}
+.label{
+	font-weight: bold;
+	margin-right: 6px;
+}
+.totais{
+	font-size:60%;
+	font-weight:bold;
+}
+.valores{
+	font-size:80%;
+}
+#descricao_header{
+	padding-left:36px;
+}
+</style>
+<body>
+<h1>EXTRATO DE PAGAMENTO</h1>
+<div id="wrap">
+	<div id="a">
+		<table>
+			<tr>
+				<td colspan="3"><span class="label">Empresa:</span><span id="empresa">IPREVILLE</span></td>
+			</tr>
+			<tr>
+				<td colspan="2"><span class="label">Segurado:</span> <?php echo $this->comprovante->nome_funcionario; ?></td>
+				<td><span class="label">M&ecirc;s/Ano:</span> <?php echo $this->comprovante->mes_referencia; ?></td>
+			</tr>
+			<tr>
+				<td colspan="2"><span class="label">C.P.F.:</span> <?php echo $this->comprovante->cpf; ?></td>
+				<td><span class="label">Matr&iacute;cula:</span> <?php echo $this->comprovante->matricula; ?></td>
+			</tr>
+			<tr>
+				<td><span class="label">Banco:</span> <?php echo $this->comprovante->banco; ?></td>
+				<td><span class="label">Ag&ecirc;ncia:</span> <?php echo $this->comprovante->agencia; ?></td>
+				<td><span class="label">C/C:</span> <?php echo $this->comprovante->conta_corrente; ?></td>
+			</tr>
+		</table>
+	</div>
+	<div id="b">
+		<table class="cabecalho_tabela">
+			<tr>
+				<th class="left" width="30">C&oacute;d.</th>
+				<th align="left" id="descricao_header">Descri&ccedil;&atilde;o</th>
+				<th class="right" width="40">Ref.</th>
+				<th class="right" width="60">Vencimentos</th>
+				<th class="right" width="60">Descontos</th>
+			</tr>
+		</table>
+		<table id="tabela_dados">
+<?php foreach ($this->comprovante->ComprovanteLinha as $k): ?>
+			<tr>
+				<td class="left" width="30"><?php echo str_pad($k->codigo, 3, "0", STR_PAD_LEFT); ?></td>
+				<td class="left"><?php echo $k->descricao; ?></td>
+				<td class="right" width="40"><?php //echo $k->referencia; ?></td>
+				<td class="right" width="60"><?php echo ($k->tipo == 'D' ? '' : $k->valor); ?></td>
+				<td class="right" width="60"><?php echo ($k->tipo == 'D' ? $k->valor : ''); ?></td>
+			</tr>
+<?php endforeach; ?>
+		</table>
+	</div>
+	<div id="c">
+		<table>
+			<tr>
+				<td class="s"><span class="totais">Total de Vencimentos</span><br /><span class="valores"><?php echo $this->comprovante->total_proventos; ?></span></td>
+				<td class="s"><span class="totais">Total de Descontos</span><br /><span class="valores"><?php echo $this->comprovante->total_descontos; ?></span></td>
+				<td class="d"><span class="totais">Valor L&iacute;quido</span><br /><span class="valores"><strong><?php echo $this->comprovante->liquido; ?></strong></span></td>
+			</tr>
+		</table>
+	</div>
+	<div id="d">
+		<?php echo $this->comprovante->mensagem_1; ?><br />
+		<?php echo $this->comprovante->mensagem_2; ?><br />
+		<?php echo $this->comprovante->mensagem_3; ?>
+	</div>
+</div>
+</body>
+</html>

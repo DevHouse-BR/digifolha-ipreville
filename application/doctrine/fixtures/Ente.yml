@@ -1,0 +1,16 @@
+Ente:
+  Ente_1:
+    nome: 'Prefeitura de Joinville'
+    login: 'prefeitura'
+    senha: '/20oPeLu2Q2MM'
+    email: 'rafael@agenciadmg.com.br'
+  Ente_2:
+    nome: 'Ipreville'
+    login: 'ipreville'
+    senha: '/20oPeLu2Q2MM'
+    email: 'rafael@agenciadmg.com.br'
+  Ente_3:
+    nome: 'Hospital São José'
+    login: 'hospital'
+    senha: '/20oPeLu2Q2MM'
+    email: 'rafael@agenciadmg.com.br'

@@ -1,0 +1,66 @@
+<?php echo $this->form; ?>
+<br />
+<div id="ente-arquivos"></div>
+
+<?php $this->headLink()->appendStylesheet($this->baseUrl() . '/css/ext-all.css'); ?>
+<?php $this->headLink()->appendStylesheet($this->baseUrl() . '/css/xtheme-gray.css'); ?>
+<?php $this->headScript()->appendFile($this->baseUrl() . '/js/ext-base.js'); ?>
+<?php $this->headScript()->appendFile($this->baseUrl() . '/js/ext-all.js'); ?>
+<?php $this->headScript()->appendFile($this->baseUrl() . '/js/ext-pt_BR.js'); ?>
+<?php $this->headScript()->appendFile($this->baseUrl() . '/js/datetime.js'); ?>
+<?php $this->headScript()->captureStart(); ?>
+Ext.onReady(function() {
+	var store = new Ext.data.JsonStore({
+		url: '<?php echo $this->url(array('module' => 'ente', 'controller' => 'index', 'action' => 'list'), null, true); ?>',
+		root: 'data',
+		idProperty: 'id',
+		totalProperty: 'total',
+		autoLoad: true,
+		autoDestroy: true,
+		remoteSort: true,
+		sortInfo: {
+			field: 'id',
+			direction: 'DESC'
+		},
+		baseParams: {
+			limit: 20
+		},
+		fields: [
+			{name: 'id', type: 'int'},
+			{name: 'periodo', type: 'string'},
+			{name: 'dt_postagem', type: 'string'},
+			{name: 'fl_publicado', type: 'string'},
+			{name: 'fl_processado', type: 'string'}
+		]
+	});
+	var yesnoRenderer = function (e) {
+		if (e == 'true') {
+			return '<center><img src="<?php echo $this->baseUrl(); ?>/images/default/dd/drop-yes.gif" alt="Sim" title="Sim" /></center>';
+		} else {
+			return '<center><img src="<?php echo $this->baseUrl(); ?>/images/default/dd/drop-no.gif" alt="Não" title="Não" /></center>';
+		}
+	};
+    var grid = new Ext.grid.GridPanel({
+        store: store,
+        columns: [
+			{id: 'id', header: 'ID', width: 60, sortable: false, dataIndex: 'id'},
+			{id: 'periodo', header: 'Período', width: 200, sortable: false, dataIndex: 'periodo'},
+			{id: 'dt_postagem', header: 'Data da Postagem', width: 115, sortable: false, dataIndex: 'dt_postagem'},
+			{id: 'fl_publicado', header: 'Publicado', width: 60, sortable: false, dataIndex: 'fl_publicado', renderer: yesnoRenderer},
+			{id: 'fl_processado', header: 'Processado', width: 70, sortable: false, dataIndex: 'fl_processado', renderer: yesnoRenderer}
+        ],
+        stripeRows: true,
+        height: 320,
+        width: '100%',
+        frame: true,
+        title: 'Postagens',
+        bbar: new Ext.PagingToolbar({
+            pageSize: store.baseParams.limit,
+            store: store,
+            displayInfo: true
+		})
+    });
+    grid.render('ente-arquivos');
+    store.load();
+});
+<?php $this->headScript()->captureEnd(); ?>

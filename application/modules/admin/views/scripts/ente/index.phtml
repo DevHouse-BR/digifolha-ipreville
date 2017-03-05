@@ -1,0 +1,178 @@
+<?php $this->headLink()->appendStylesheet($this->baseUrl() . '/css/ext-all.css'); ?>
+<?php $this->headLink()->appendStylesheet($this->baseUrl() . '/css/xtheme-gray.css'); ?>
+<?php $this->headScript()->appendFile($this->baseUrl() . '/js/ext-base.js'); ?>
+<?php $this->headScript()->appendFile($this->baseUrl() . '/js/ext-all.js'); ?>
+<?php $this->headScript()->appendFile($this->baseUrl() . '/js/ext-pt_BR.js'); ?>
+<?php $this->headScript()->appendFile($this->baseUrl() . '/js/datetime.js'); ?>
+<?php $this->headScript()->captureStart(); ?>
+Ext.onReady(function() {
+	Ext.QuickTips.init();
+	Ext.form.Field.prototype.msgTarget = 'side';
+	Ext.apply(Ext.form.VTypes, {
+		password : function(val, field) {
+			if (field.initialPassField) {
+				var login = Ext.getCmp(field.initialPassField);
+	            return (val == login.getValue());
+	        }
+	        return true;
+	    },
+	    passwordText : 'As senhas precisam ser iguais'
+	});
+	var FormControl = {
+		enteID: 0,
+		form: new Ext.form.FormPanel({
+			url: '<?php echo $this->url(array('module' => 'admin', 'controller' => 'ente', 'action' => 'senha'), null, true); ?>',
+	        baseCls: 'x-plain',
+	        layout: 'form',
+			labelWidth: 130,
+			defaults: {
+				xtype: 'textfield',
+				width: 223
+			},
+	        items: [{
+				xtype: 'label',
+				name: 'nome',
+				fieldLabel: 'Nome',
+				id: 'ente_lbl_nome'
+			}, {
+				name: 'senha_nova1',
+ 				id: 'senha_nova1',
+				fieldLabel: 'Senha nova',
+				allowBlank: false,
+				inputType: 'password'
+			}, {
+				name: 'senha_nova2',
+				fieldLabel: 'Senha nova (confirmar)',
+				allowBlank: false,
+				inputType: 'password',
+				vtype: 'password',
+				initialPassField: 'senha_nova1'
+			}]
+		}),
+		panel: new Ext.Window({
+			title: 'Trocar senha',
+	        width: 400,
+	        height: 155,
+			resizable: false,
+			draggable: false,
+	        layout: 'fit',
+	        bodyStyle: 'padding: 5px;',
+	        buttonAlign: 'center',
+	        items: [],
+	        buttons: [{
+	            text: 'Salvar',
+				handler: function () {
+					if (!FormControl.form.form.isValid()) {
+						Ext.MessageBox.show({
+							title: 'Atenção',
+							msg: 'Preencha todos os campos',
+							buttons: Ext.MessageBox.OK
+						});
+						return false;
+					}
+					FormControl.form.form.submit({
+						params:{
+							id: FormControl.enteID
+						},
+						success: function () {
+							Ext.MessageBox.show({
+								title: 'Atenção',
+								msg: 'Senha alterada com sucesso',
+								buttons: Ext.MessageBox.OK,
+								fn: function () {
+									FormControl.panel.hide();
+								}
+							});
+						},
+						failure: function () {
+							Ext.MessageBox.show({
+								title: 'Atenção',
+								msg: 'Houve um erro ao alterar a senha',
+								buttons: Ext.MessageBox.OK
+							});
+						}
+					});
+				}
+	        }, {
+	            text: 'Cancelar',
+				scope: this,
+				handler: function () {
+					FormControl.panel.hide();
+					FormControl.enteID = 0;
+					FormControl.form.form.reset();
+				}
+	        }]
+		}),
+		show: function (id) {
+			this.enteID = id;
+			this.panel.show();
+			this.form.form.reset();
+		}
+	};
+	FormControl.panel.add(FormControl.form);
+	var store = new Ext.data.JsonStore({
+		url: '<?php echo $this->url(array('module' => 'admin', 'controller' => 'ente', 'action' => 'list'), null, true); ?>',
+		root: 'data',
+		idProperty: 'id',
+		totalProperty: 'total',
+		autoLoad: true,
+		autoDestroy: true,
+		remoteSort: true,
+		sortInfo: {
+			field: 'id',
+			direction: 'DESC'
+		},
+		baseParams: {
+			limit: 20
+		},
+		fields: [
+			{name: 'id', type: 'int'},
+			{name: 'nome', type: 'string'},
+			{name: 'email', type: 'string'},
+			{name: 'login', type: 'string'}
+		]
+	});
+    var grid = new Ext.grid.GridPanel({
+        store: store,
+        columns: [
+			{id: 'id', header: 'ID', width: 40, sortable: false, dataIndex: 'id'},
+			{id: 'nome', header: 'Nome', width: 160, sortable: false, dataIndex: 'nome'},
+			{id: 'email', header: 'E-mail', width: 160, sortable: false, dataIndex: 'email'},
+			{id: 'login', header: 'Login', width: 80, sortable: false, dataIndex: 'login'}
+        ],
+        stripeRows: true,
+        height: 320,
+        width: '100%',
+        frame: true,
+        title: 'Entes',
+		listeners: {
+			rowdblclick: function (a, b) {
+				FormControl.show(store.data.items[b].id);
+				Ext.getCmp('ente_lbl_nome').setText(store.data.items[b].data.nome);
+			}
+		},
+		tbar: ['->', {
+			xtype: 'button',
+			text: 'Trocar senha',
+			iconCls: 'silk-secret',
+			handler: function () {
+				var seld = grid.getSelectionModel().getSelections();
+				if (seld.length != 1) {
+					alert('selecione apenas um ente para trocar a senha');
+					return false;
+				}
+				FormControl.show(seld[0].id);
+				Ext.getCmp('ente_lbl_nome').setText(seld[0].data.nome);
+			}
+		}],
+        bbar: new Ext.PagingToolbar({
+            pageSize: store.baseParams.limit,
+            store: store,
+            displayInfo: true
+		})
+    });
+    grid.render('grid-entes');
+});
+<?php $this->headScript()->captureEnd(); ?>
+
+<div id="grid-entes"></div>

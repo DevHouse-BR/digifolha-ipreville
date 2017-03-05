@@ -1,0 +1,70 @@
+<?php $this->headLink()->appendStylesheet($this->baseUrl() . '/css/ext-all.css'); ?>
+<?php $this->headLink()->appendStylesheet($this->baseUrl() . '/css/xtheme-gray.css'); ?>
+<?php $this->headScript()->appendFile($this->baseUrl() . '/js/ext-base.js'); ?>
+<?php $this->headScript()->appendFile($this->baseUrl() . '/js/ext-all.js'); ?>
+<?php $this->headScript()->appendFile($this->baseUrl() . '/js/ext-pt_BR.js'); ?>
+<?php $this->headScript()->appendFile($this->baseUrl() . '/js/datetime.js'); ?>
+<?php $this->headScript()->captureStart(); ?>
+Ext.onReady(function() {
+	var store = new Ext.data.JsonStore({
+		url: '<?php echo $this->url(array('module' => 'admin', 'controller' => 'index', 'action' => 'log-list'), null, true); ?>',
+		root: 'data',
+		idProperty: 'id',
+		totalProperty: 'total',
+		autoLoad: true,
+		autoDestroy: true,
+		remoteSort: true,
+		sortInfo: {
+			field: 'data',
+			direction: 'DESC'
+		},
+		baseParams: {
+			limit: 20
+		},
+		fields: [
+			{name: 'id', type: 'int'},
+			{name: 'data', type: 'string'},
+			{name: 'ente', type: 'string'},
+			{name: 'postagem', type: 'string'},
+			{name: 'ip', type: 'string'},
+			{name: 'tipo', type: 'string'},
+			{name: 'mensagem', type: 'string'},
+			{name: 'status', type: 'string'}
+		]
+	});
+	var yesnoRenderer = function (e) {
+		if (e == 'true') {
+			return '<center><img src="<?php echo $this->baseUrl(); ?>/images/default/dd/drop-yes.gif" alt="Sim" title="Sim" /></center>';
+		} else {
+			return '<center><img src="<?php echo $this->baseUrl(); ?>/images/default/dd/drop-no.gif" alt="Não" title="Não" /></center>';
+		}
+	};
+    var grid = new Ext.grid.GridPanel({
+        store: store,
+        columns: [
+			{dataIndex: 'id', sortable: false, header: 'ID', width: 60},
+			{dataIndex: 'data', sortable: false, header: 'Data', width: 120},
+			{dataIndex: 'ente', sortable: false, header: 'Ente', width: 120},
+			{dataIndex: 'postagem', sortable: false, header: 'Postagem', width: 120},
+			{dataIndex: 'ip', sortable: false, header: 'IP', width: 100},
+			{dataIndex: 'tipo', sortable: false, header: 'Tipo', width: 100},
+			{dataIndex: 'mensagem', sortable: false, header: 'Mensagem', width: 150},
+			{dataIndex: 'status', sortable: false, header: 'Enviada', width: 60, renderer: yesnoRenderer}
+        ],
+        stripeRows: true,
+        height: 320,
+        width: '100%',
+        frame: true,
+        title: 'Logs do Sistema',
+        bbar: new Ext.PagingToolbar({
+            pageSize: store.baseParams.limit,
+            store: store,
+            displayInfo: true
+		})
+    });
+    grid.render('grid-log');
+    store.load();
+});
+<?php $this->headScript()->captureEnd(); ?>
+
+<div id="grid-log"></div>

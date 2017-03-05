@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<link href="<?php echo $this->baseUrl() . '/css/login.css'; ?>" rel="stylesheet" type="text/css" />
+
+<!--[if IE 6]>
+<link href="<?php echo $this->baseUrl() . '/css/ie6.css'; ?>" rel="stylesheet" type="text/css" />
+<![endif]-->
+<!--[if IE 7]>
+<link href="<?php echo $this->baseUrl() . '/css/ie7.css'; ?>" rel="stylesheet" type="text/css" />
+<![endif]-->
+</head>
+<body>
+<?php 
+	$endereco = $_SERVER ['REQUEST_URI'];
+	$registro = substr($endereco,(strlen($endereco)-8),strlen($endereco));
+	
+	if($registro == "registro" || $registro == "/contato"){ 
+		$fl_registro = 1;
+		$classRodape = "rodapeRegistro";
+		$classCentralize = "centralizeRegistro";
+		$classBg_login = "bg_loginRegistro";
+	}else{
+		$fl_registro = 0;
+		$classRodape = "rodape";
+		$classCentralize = "centralize";
+		$classBg_login = "bg_login";
+	}
+?>
+<div class="login">
+	<div class="login_wrap">
+		<div class="header">
+			<div class="header_center">
+				<div class="digifolha"><img src="<?php echo $this->baseUrl(); ?>/images/logodigifolha.png" alt="Digifolha"/></div>
+				<div class="sistema"><img src="<?php echo $this->baseUrl(); ?>/images/sistema.jpg" alt="Sistema Ipreville"/></div>
+			</div>
+		</div>
+		<div class="login_center">
+			<div class="<?php echo $classBg_login; ?>">
+				<div class="<?php echo $classCentralize; ?>">
+					<?php echo $this->layout()->content; ?>
+				</div>
+			</div>
+		</div>
+		<div class="clearfloat"></div>
+		<div class="bottom">
+			<?php
+				if($fl_registro==0){
+			?>
+			<div class="logos">
+				<div class="logos_center">
+					<div class="ipreville"><a href="http://www.ipreville.sc.gov.br/" target="_blank"><img src="<?php echo $this->baseUrl(); ?>/images/logo_ipreville.jpg" alt="Ipreville" border="0" /></a></div>
+					<div class="jlle"><a href="http://www.joinville.sc.gov.br/" target="_blank"><img src="<?php echo $this->baseUrl(); ?>/images/pref_jlle.jpg" alt="Prefeitura de Joinville" border="0" /></a></div>
+				</div>
+			</div>
+			<?php
+				}
+			?>
+			<div class="<?php echo $classRodape;?>">
+				<p>Ipreville - Instituto de Previdência Social dos Servidores Públicos do Município de Joinville - Órgão integrante da Prefeitura Municipal - Praça Nereu Ramos, 372, Centro - Joinville/SC - CEP: 89.201-170 - Fone: (47) 3423-1900 - <a href="mailto:ipreville@ipreville.sc.gov.br">ipreville@ipreville.sc.gov.br</a> - <a href="http://www.ipreville.sc.gov.br/" target="_blank">www.ipreville.sc.gov.br</a></p>
+				<p>Desenvolvido por <a href="http://www.dmgdigital.com.br" target="_blank" class="linkCopyright">DMG Digital</a></p>
+			</div>
+			<div class="copyright">
+				<p>
+					&nbsp;
+				</p>
+			</div>	
+		</div>
+		<div class="clearfloat"></div>
+	</div>
+</div>
+<div class="clearfloat"></div>
+</body>
+</html>

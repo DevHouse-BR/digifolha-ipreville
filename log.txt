@@ -1,0 +1,51 @@
+Log: Tentativa de Acesso Administrador
+
+Data: 2010-05-18 17:15:40
+IP: ::1
+Usuário informado: aosndaiusb
+Senha informada: nsaiudn
+
+Sistema Digifolha
+Erro de envio:
+Could not open socket
+----------
+
+Log: Acesso Administrador
+
+Data: 2010-05-18 17:15:44
+IP: ::1
+
+Sistema Digifolha
+Erro de envio:
+No connection has been established to 
+----------
+
+Log: Acesso Administrador
+
+Data: 2010-05-18 17:17:09
+IP: ::1
+
+Sistema Digifolha
+Erro de envio:
+No connection has been established to 
+----------
+
+
+Erro de envio:
+Unknown method Log::str_replace
+----------
+
+
+Erro de envio:
+Unknown method Log::str_replace
+----------
+
+Log: Importação de Arquivos
+
+Data: 2010-08-03 09:06:03
+
+Sistema Digifolha
+Erro de envio:
+Connection refused
+----------
+

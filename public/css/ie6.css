@@ -1,0 +1,197 @@
+
+.login {
+width:590px;
+height:590px;
+top: 50%;
+left: 50%;
+margin-top: -295px;
+margin-left: -295px;
+position: absolute;
+background:url(../images/bg_login.jpg) no-repeat center center;
+}
+.login_wrap {
+width:474px;
+margin:50px auto;
+}
+.header {
+float:left;
+width:100%;
+}
+.header_center {
+width:380px;
+margin:0 auto;
+}
+.digifolha {
+float:left;
+}
+.sistema {
+border-left:2px solid #CCCCCC;
+float:right;
+height:50px;
+margin:25px 0;
+text-align:right;
+width:220px;
+}
+.bg_login {
+margin:0 auto;
+width:305px;
+height:237px;
+background:url(../images/bg_login_center.jpg) no-repeat;
+}
+.bg_loginRegistro {
+margin:0 auto;
+width:460px;
+height:237px;
+/*background:url(../images/bg_login_center.jpg) no-repeat;*/
+}
+.login_center, .logos {
+float:left;
+width:100%;
+}
+.centralize {
+width:244px;
+margin:10px auto;
+padding:1px 0;
+}
+.centralizeRegistro {
+width:450px;
+margin:10px auto;
+padding:1px 0;
+}
+.logos_center {
+margin:20px auto;
+width:225px;
+margin-top: 4px;
+}
+.ipreville {
+float:left;
+}
+.jlle {
+float:right;
+}
+
+
+textarea#mensagem{
+border: 1px solid #DCDCDC;
+
+}
+
+#pass-element, #pass-label, #email-element, #email-label {
+margin-top:15px;
+}
+#cpf-element, #pass-element, #user-element, #email-element, #nome-element, #mensagem-element, #titulo-element, #emailconf {
+margin-left:30px;
+}
+
+.clearfloat { 
+	clear:both;
+	height:0;
+	font-size: 1px;
+	line-height: 0px;
+}
+.rodape {
+float:left;
+font-family:Arial Narrow, Arial, Tahoma, Verdana;
+font-size:11px;
+text-align:center;
+top:502px;
+left: 50px;
+position: absolute; 
+width: 500px;
+}
+
+.rodapeRegistro {
+float:left;
+font-family:Arial Narrow, Arial, Tahoma, Verdana;
+font-size:11px;
+text-align:center;
+top:502px;
+left: 50px;
+position: absolute; 
+width: 500px;
+}
+
+#cpf-label, #pass-label,#user-label, #email-label, #nome-label, #mensagem-label, #titulo-label, #email-label, #emailconf-label  {
+float:left;
+font-family:Arial Narrow, Arial, Tahoma;
+font-size:17px;
+padding-top:1px;
+}
+.txt_primeiroacesso {
+float:left;
+font-family:Arial Narrow, Arial, Tahoma;
+font-size:15px;
+margin-bottom:15px;
+text-align: justify
+}
+.welcome {
+font-size:17px;
+font-family:Arial Narrow, Arial, Tahoma;
+text-align:center;
+}
+a.login_links {
+font-size:16px;
+font-family:Arial Narrow, Arial, Tahoma;
+text-align:center;
+text-decoration:none;
+color:#28166F;
+}
+a.login_links:hover {
+text-decoration:underline;
+}
+a.login_links_menu:hover {
+text-decoration:underline;
+}
+a.login_links_menu {
+font-size:13px;
+font-family:Arial Narrow, Arial, Tahoma;
+text-align:center;
+text-decoration:none;
+color:#28166F;
+}
+#send-element {
+margin:-10px auto;
+width:60px;
+}
+input#send {
+background:url(../images/bg_btn.png) no-repeat;
+width:58px;
+height:26px;
+border:none;
+cursor:pointer;
+color:#FFF;
+text-transform:uppercase;
+font-size:11px;
+}
+
+p.erro {
+margin:5px;
+text-align:center;
+color:#FF2929;
+font-size:16px;
+font-family:Arial Narrow, Arial, Tahoma;
+}
+
+#msgs_btn h3 {
+	padding:5px 0;
+	color:#17387F;
+	border-bottom:1px solid #DEDEDE;
+	text-align:left;
+	margin-bottom:10px;
+	font-family:Arial Narrow, Arial, Tahoma;
+}
+
+h3 {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-size: 100%;
+	vertical-align: baseline;
+	background: transparent;
+}
+
+.copyright{
+	float:left;
+	font-family:Arial Narrow, Arial, Tahoma;
+}

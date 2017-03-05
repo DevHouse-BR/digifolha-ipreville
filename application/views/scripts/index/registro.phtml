@@ -1,0 +1,12 @@
+<div id="msgs_btn">
+	<h3>Primeiro acesso </h3>
+</div>
+<div class="txt_primeiroacesso">
+	Se este for seu primeiro acesso ao sistema, informe o n&uacute;mero do seu CPF e um endere&ccedil;o v&aacute;lido de E-MAIL, pois, uma mensagem contendo sua senha ser&aacute; enviada para o e-mail informado. Caso n&atilde;o receba a mensagem, consulte sua caixa de SPAM ou entre em contato com o Ipreville <a href="<?php echo $this->url(array('module' => 'default', 'controller' => 'index', 'action' => 'contato'), null, true); ?>" class="login_links">clicando aqui</a>.
+	Se voc&ecirc; j&aacute; acessou o sistema anteriormente, mas, perdeu sua senha, <a href="<?php echo $this->url(array('module' => 'default', 'controller' => 'index', 'action' => 'recuperar-senha'), null, true); ?>" class="login_links">clique aqui</a>.
+</div>
+<?php echo $this->form; ?>
+<?php if (count($this->messages)): ?>
+<p class="erro"><?php echo $this->messages[0]; ?></p>
+<?php endif; ?>
+<a href="<?php echo $this->url(array('module' => 'default', 'controller' => 'index', 'action' => 'login'), null, true); ?>" class="login_links">Voltar</a>

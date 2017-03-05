@@ -1,0 +1,44 @@
+Log:
+  options:
+    collate: utf8_unicode_ci
+    charset: utf8
+  tableName: log
+  columns:
+    id:
+      type: integer(4)
+      unsigned: true
+      primary: true
+      autoincrement: true
+    data:
+      type: timestamp
+      notnull: true
+    ente_id:
+      type: integer(4)
+      notnull: false
+    postagem_id:
+      type: integer(8)
+      notnull: false
+    ip:
+      type: string(255)
+      notnull: false
+    tipo:
+      type: string(255)
+      notnull: true
+    mensagem:
+      type: clob
+      notnull: true
+    status:
+      type: boolean
+      notnull: true
+    send_mail:
+      type: string(1)
+      notnull: true
+  relations:
+    Ente:
+      local: ente_id
+      foreign: id
+      type: one
+    Postagem:
+      local: postagem_id
+      foreign: id
+      type: one  

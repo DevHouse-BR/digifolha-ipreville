@@ -1,0 +1,12 @@
+<div id="msgs_btn">
+	<h3>Contato</h3>
+</div>
+<?php echo $this->form; ?>
+<?php if (count($this->messages)): ?>
+<p class="erro"><?php echo $this->messages[0]; ?></p>
+<?php endif; ?>
+<a href="<?php echo $this->url(array('module' => 'default', 'controller' => 'index', 'action' => 'login'), null, true); ?>" class="login_links">Voltar</a>
+<script languague="javascript">
+document.getElementById('email-label').style.marginTop = '0px';
+document.getElementById('email-element').style.marginTop = '0px';
+</script>

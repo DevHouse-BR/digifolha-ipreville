@@ -1,0 +1,8 @@
+<div id="msgs_btn">
+	<h3>Login</h3>
+</div>
+<?php echo $this->form;?>
+<?php if (count($this->messages)): ?>
+<p class="erro"><?php echo $this->messages[0]; ?></p>
+<?php endif; ?><div class="4ie">
+<a href="<?php echo $this->url(array('module' => 'default', 'controller' => 'index', 'action' => 'registro'), null, true); ?>" class="login_links_menu">Primeiro acesso</a> | <a href="<?php echo $this->url(array('module' => 'default', 'controller' => 'index', 'action' => 'recuperar-senha'), null, true); ?>" class="login_links_menu">Esqueci minha senha</a> | <a href="<?php echo $this->url(array('module' => 'default', 'controller' => 'index', 'action' => 'contato'), null, true); ?>" class="login_links_menu">Contato</a></div>

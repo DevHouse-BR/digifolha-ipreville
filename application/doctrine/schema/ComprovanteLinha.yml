@@ -1,0 +1,35 @@
+ComprovanteLinha:
+  options:
+    collate: utf8_unicode_ci
+    charset: utf8
+  tableName: comprovante_linha
+  columns:
+    id:
+      type: integer(4)
+      unsigned: true
+      primary: true
+      autoincrement: true
+    comprovante_id:
+      type: integer(8)
+      unsigned: true
+      notnull: true
+    codigo:
+      type: integer
+      notnull: true
+    descricao:
+      type: string(255)
+      notnull: true
+    referencia:
+      type: string(255)
+      notnull: false
+    valor:
+      type: string(255)
+      notnull: true
+    tipo:
+      type: string(1)
+      notnull: true
+  relations:
+    Comprovante:
+      local: comprovante_id
+      foreign: id
+      type: one

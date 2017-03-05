@@ -1,0 +1,576 @@
+div.jqmAlertContent a.marcar {
+	color: red;
+}
+html, body, #wrap {height: 99%;}
+body > #wrap {height: auto; min-height:99%;}
+
+body {
+margin:0;
+font-family:Arial, Verdana, Tahoma;
+line-height: 1;
+}
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-size: 100%;
+	vertical-align: baseline;
+	background: transparent;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+
+/* remember to define focus styles! */
+:focus {
+	outline: 0;
+}
+
+/* remember to highlight inserts somehow! */
+ins {
+	text-decoration: none;
+}
+del {
+	text-decoration: line-through;
+}
+
+/* tables still need 'cellspacing="0"' in the markup */
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+#tudo {
+margin:0 auto;
+min-height:100%;
+min-width: 981px;
+position:relative;
+}
+/*#wrap {
+margin:10px 20px;
+padding-bottom:28px;
+}*/
+.wrapper {
+ min-height: 100%;
+ height: auto !important;
+ height: 100%;
+ margin: 0 auto -50px;
+}
+
+
+#wrap {
+	padding-bottom:0;
+	margin:10px 20px 0 ;
+}
+
+#wrap_p {
+	padding-bottom:50px;
+	margin:10px 20px 0 ;
+}
+.header {
+float:left;
+width:100%;
+}
+.header_left {
+width:300px;
+float:left;
+padding:20px 0 0 40px;
+width:22%;
+}
+.header_center {
+height:110px;
+width:50%;
+float:left;
+
+}
+.center {
+	width:400px;
+	margin:0 auto;
+}
+.header_right {
+color:#DA251D;
+float:left;
+font-family:Arial Narrow,Arial,Tahoma;
+font-size:24px;
+margin-top:20px;
+text-align:center;
+width:20%;
+}
+.ipreville {
+float:left;
+}
+.jlle {
+float:left;
+margin-left:20px;
+}
+#footer {
+background:url("../images/bg_rodape.png") repeat-x scroll left bottom transparent;
+height:35px;
+padding:20px 0;
+text-align:center;
+width:100%;
+}
+#footer_p {
+background:url("../images/bg_rodape.png") repeat-x scroll left bottom transparent;
+height:35px;
+padding:20px 0;
+text-align:center;
+position:absolute;
+bottom:0;
+width:100%;
+}
+.menu_left {
+background:url(../images/top_menu_tools.png) no-repeat left top;
+float:left;
+width:130px;
+padding:20px 0 0;
+}
+#left {
+float:left;
+text-align:center;
+width:150px;
+}
+#main {
+margin-left:160px;
+margin-right:20px;
+position:relative;
+}
+#main_1 {
+margin-left:0px;
+margin-right:20px;
+position:relative;
+}
+.main_content2 #main {
+position:relative;
+margin-left:0;
+margin-right:20px;
+} 
+.menu_left_top {
+background:url(../images/bt_menu_tools.png) no-repeat left bottom;
+float:left;
+padding:0 10px 20px;
+width:110px;
+
+}
+.footer_center {
+width:800px;
+font-size:14px;
+font-family:Arial Narrow, Arial, Tahoma;
+margin:0 auto;
+text-align:center;
+}
+.welcome {
+height:30px;
+width:100%;
+background:url(../images/bg_bv_left.png) no-repeat left top;
+font-family:Arial Narrow, Arial, Tahoma;
+font-size:16px;
+float:left;
+}
+span.b {
+	font-weight:bold;
+}
+.conteudo {
+margin-left:150px;
+position:relative;
+}
+.welcome_bg_r {
+background:url(../images/bg_bv_right.png) no-repeat right top;
+width:100%;
+float:left;
+height:30px;
+}
+#tbar_left, #tbar_right, #tbar {
+float:left;
+}
+#menuPagina {
+float:right;
+margin-top:5px;
+margin-right:40px;
+}
+#tbar p{
+margin:5px 0 0 20px;
+}
+.digifolha {
+float:left;
+}
+.sistema {
+border-left:2px solid #CCCCCC;
+float:right;
+height:50px;
+margin:25px 0;
+text-align:right;
+width:220px;
+}
+ul {
+margin:0;
+padding:0;
+}
+li.mainmenu {
+list-style:none;
+height:44px;
+width:110px;
+text-align:center;
+font-family:Arial Narrow, Arial;
+margin:5px 0;
+}
+li.mainmenu  a {
+background:url(../images/btn_tool.png) no-repeat left top;
+color:#FFF;
+display:block;
+padding:10px 0 20px;
+text-decoration:none;
+}
+li.mainmenu a:hover {
+background:url(../images/btn_tool_2.png) no-repeat left top;
+}
+.clearfloat { 
+	clear:both;
+	height:0;
+	font-size: 1px;
+	line-height: 0px;
+}
+.cont-1 {
+background:url("../images/top_left.gif") no-repeat scroll left top transparent;
+float:left;
+padding:0 0 0 20px;
+width:100%;
+}
+.cont-2 {
+background:url("../images/top_right.gif") no-repeat scroll right top transparent;
+float:left;
+padding:20px 0 0;
+width:100%;
+
+}
+.cont-3 {
+background:url("../images/btn_right.gif") no-repeat scroll right bottom transparent;
+float:left;
+padding:20px 0 0;
+width:100%;
+}
+.content {
+background:url("../images/btn_left.gif") no-repeat scroll left bottom transparent;
+float:left;
+margin-left:-20px;
+margin-right:0px;
+padding:0 0 50px 35px;
+/*padding:0 30px 50px;*/
+width:94%;
+}
+
+.main_content {
+padding-bottom:40px;
+padding-top:15px;
+float:left;
+width:100%;
+}
+.main_content2 {
+float:left;
+margin-top:15px;
+width:100%;
+padding-bottom: 40px; /* deve ser a mesma altura do rodapé */
+}
+.main_content2 .login {
+background:url("../images/bg_login_center.jpg") no-repeat scroll 0 0 transparent;
+margin:0 auto;
+padding:60px 20px;
+width:275px;
+}
+.cantos_top {
+	width:100%;
+	height:20px;
+}
+/*.cont-1 {
+background:url(../images/btn_right.gif) no-repeat scroll 100% 100% transparent;
+font-size:100%;
+margin:0 auto;
+width:25em;
+padding:0 20px 0 0;
+}
+.cont-2 {
+background:url(../images/top_right.gif) no-repeat scroll 100% 0 transparent;
+margin:0;
+padding:0;
+text-align:center;
+}
+.cont-2 h3 {
+background:url(../images/top_left.gif) no-repeat scroll 0 0 transparent;
+color:#333333;
+font-size:1.4em;
+font-weight:bold;
+line-height:1em;
+margin:0;
+padding:45px 20px 5px;
+}
+* html .cont-2 h3 {
+height:1%;
+}
+.cont-4 {
+background:url(../images/btn_left.gif) no-repeat scroll 0 100% transparent;
+color:#FFFFFF;
+margin:0;
+padding:5px 45px 45px;
+}*/
+.login_2 {
+/*height:220px;*/
+margin:0 auto;
+/*width:160px;*/
+
+}
+#messages, #comprovantes, #mensagens {
+	text-align:center;
+	font-size:16px;
+	color:#DA251D;
+	margin:10px 0;
+}
+#contato{
+	font-size:16px;
+	color:#DA251D;
+	margin:10px 0;
+}
+#send, #confAlter, #cancAlter {
+	background:url(../images/btn_tool_.png) no-repeat;
+	height:32px;
+	width:110px;
+	border:none;
+	color:#FFF;
+	cursor:pointer;
+}
+ul.errors li {
+	color:#DA251D;
+}
+input#user, input#pass {
+	background:url("../images/input.gif") no-repeat scroll 0 0 transparent;
+	border:medium none;
+height:25px;
+padding-left:5px;
+padding-right:5px;
+width:188px;
+}
+#user-label, #pass-label {
+width:70px;
+float:left;
+}
+#user-element, #pass-element, #titulo-label, #mensagem-label {
+	margin:5px 0;
+}
+input#titulo, input#mensagem , input#nome , input#cpf, input#mensagem , input#email, input#emailconf{
+	background:url("../images/input_big.gif") no-repeat scroll 0 0 transparent;
+	border:medium none;
+	height:25px;
+	padding-left:5px;
+	padding-right:10px;
+	width:278px;
+}
+textarea#mensagem{
+border: 1px solid #DCDCDC;
+
+}
+
+.main_content2 .login #send-element {
+	width:110px;
+	margin:0 auto;
+}
+
+.main_content2 .login #confAlter-element {
+	width:110px;
+	margin:0 auto;
+}
+
+.main_content2 .login #cancAlter-element {
+	width:110px;
+	margin:0 auto;
+}
+
+tr.comprovante_h {
+border-bottom:1px dotted #CCCCCC;
+}
+th.mes {
+	width:80px;
+	height:30px;
+vertical-align:middle;
+color:#17387F;	background:#FFF
+}
+th.empresa {
+	width:200px;
+	height:30px;
+vertical-align:middle;
+color:#17387F;	background:#FFF
+}
+th.print {
+	width:100px;
+	height:30px;
+vertical-align:middle;
+color:#17387F;	background:#FFF
+}
+td.mes, td.empresa, td.print {
+	font-size:12px;
+	padding:5px;
+color:#000000;
+}
+td.mes {
+	border-right:1px dotted #CCC;
+}
+td.print {
+	border-left:1px dotted #CCC;
+}
+	
+#comprovantes table {
+
+}
+#comprovantes {
+background:url("../images/bt_msgs.png") no-repeat scroll left bottom transparent;
+float:left;
+width:415px;
+line-height:150%;
+}
+
+#avisoAut{
+	float:left;
+	margin-top:2px;
+	position: fixed;
+}
+
+#contato table {
+
+}
+#contato {
+/*background:url("../images/bt_msgs.png") no-repeat scroll left bottom transparent;*/
+float:left;
+width:520px;
+line-height:150%;
+}
+#main2 {
+	margin-right:20px;
+}
+#mensagens {
+background:url("../images/bt_msgs.png") no-repeat scroll left bottom transparent;
+float:left;
+margin-left:35px;
+width:415px;
+}
+
+#msgs_btn {
+background:url("../images/top_msgs.png") no-repeat scroll left top transparent;
+float:left;
+padding:10px;
+width:395px;
+line-height:150%;
+}
+
+#msgs_btn_contato {
+/*background:url("../images/top_msgs.png") no-repeat scroll left top transparent;*/
+float:left;
+padding:10px;
+width:500px;
+line-height:150%;
+}
+
+#msgs_btn_contato h3 {
+padding:5px 0;
+color:#17387F;
+border-bottom:1px solid #DEDEDE;
+text-align:left;
+margin-bottom:10px;
+}
+
+#msgs_btn h3 {
+padding:5px 0;
+color:#17387F;
+border-bottom:1px solid #DEDEDE;
+text-align:left;
+margin-bottom:10px;
+}
+.aniversario_btn h3 {
+padding:5px 0;
+color:#17387F;
+text-align:left;
+margin-bottom:0px;
+}
+a.abrir, a.abrir:visited {
+color:#17387F;
+float:left;
+font-weight:bold;
+margin-right:10px;
+padding:5px 0;
+text-decoration:none;
+width:240px;
+}
+a.abrir:hover {
+	text-decoration:underline;
+}
+.aniversario_btn {
+/*background:url("../images/top_aniv.png") no-repeat scroll left top transparent;*/
+float:left;
+/*padding:10px;*/
+width:846px;
+line-height:150%;
+}
+.aniversario_top {
+/*background:url("../images/bt_aniv.png") no-repeat scroll left bottom transparent;*/
+float:left;
+width:864px;
+}
+.gift {
+background:url("../images/gift.jpg") no-repeat scroll left center transparent;
+float:left;
+padding:0 0 10px 50px;
+width:814px;
+}
+span.data {
+border-left:1px solid #CCCCCC;
+color:#000000;
+float:left;
+font-size:12px;
+padding-left:10px;
+padding-top:5px;
+padding-bottom:5px;
+width:80px;
+}
+li.lida, li.naolida {
+border-bottom:1px dotted #CCCCCC;
+float:left;
+font-size:13px;
+padding:10px 5px 10px 30px;
+text-align:left;
+width:360px;
+}
+li.lida a.abrir {
+	font-weight:normal;
+}
+li.lida {
+	background:url("../images/aberto.png") no-repeat scroll left center transparent;
+}
+li.naolida {
+	background:url("../images/fechado.png") no-repeat scroll left center transparent;
+}
+#aniversario {
+width:100%;
+float:left;
+
+
+}
+#msg_downloadPdf {
+float:left;
+width:800px;
+font-size:12px;
+margin-top:20px;
+color:red;
+}

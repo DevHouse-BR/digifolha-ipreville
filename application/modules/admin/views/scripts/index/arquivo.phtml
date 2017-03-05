@@ -1,0 +1,137 @@
+<?php $this->headLink()->appendStylesheet($this->baseUrl() . '/css/ext-all.css'); ?>
+<?php $this->headLink()->appendStylesheet($this->baseUrl() . '/css/xtheme-gray.css'); ?>
+<?php $this->headScript()->appendFile($this->baseUrl() . '/js/ext-base.js'); ?>
+<?php $this->headScript()->appendFile($this->baseUrl() . '/js/ext-all.js'); ?>
+<?php $this->headScript()->appendFile($this->baseUrl() . '/js/ext-pt_BR.js'); ?>
+<?php $this->headScript()->appendFile($this->baseUrl() . '/js/datetime.js'); ?>
+<?php $this->headScript()->captureStart(); ?>
+Ext.onReady(function() {
+	var store = new Ext.data.JsonStore({
+		url: '<?php echo $this->url(array('module' => 'admin', 'controller' => 'index', 'action' => 'arquivo-list'), null, true); ?>',
+		root: 'data',
+		idProperty: 'id',
+		totalProperty: 'total',
+		autoLoad: true,
+		autoDestroy: true,
+		remoteSort: true,
+		sortInfo: {
+			field: 'dt_postagem',
+			direction: 'DESC'
+		},
+		baseParams: {
+			limit: 20
+		},
+		fields: [
+			{name: 'id', type: 'int'},
+			{name: 'periodo', type: 'string'},
+			{name: 'dt_postagem', type: 'string'},
+			{name: 'fl_publicado', type: 'string'},
+			{name: 'ente', type: 'string'}
+		]
+	});
+	var yesnoRenderer = function (e) {
+		if (e == 'true') {
+			return '<center><img src="<?php echo $this->baseUrl(); ?>/images/default/dd/drop-yes.gif" alt="Sim" title="Sim" /></center>';
+		} else {
+			return '<center><img src="<?php echo $this->baseUrl(); ?>/images/default/dd/drop-no.gif" alt="Não" title="Não" /></center>';
+		}
+	};
+    var grid = new Ext.grid.GridPanel({
+        store: store,
+        columns: [
+			{id: 'id', header: 'ID', width: 60, sortable: false, dataIndex: 'id'},
+			{id: 'periodo', header: 'Período', width: 200, sortable: false, dataIndex: 'periodo'},
+			{id: 'dt_postagem', header: 'Data da Postagem', width: 115, sortable: false, dataIndex: 'dt_postagem'},
+			{id: 'ente', header: 'Ente', width: 150, sortable: false, dataIndex: 'ente'},
+			{id: 'fl_publicado', header: 'Publicado', width: 60, sortable: false, dataIndex: 'fl_publicado', renderer: yesnoRenderer}
+        ],
+        stripeRows: true,
+        height: 320,
+        width: '100%',
+        frame: true,
+        title: 'Manutenção de arquivos',
+		tbar: ['->', {
+			xtype: 'button',
+			text: 'Publicar',
+			iconCls: 'silk-publish',
+			handler: function () {
+				var arrSelecionados = grid.getSelectionModel().getSelections();
+				var id = new Array();
+				for (var i = 0; i < arrSelecionados.length; i++) {
+					id.push(arrSelecionados[i].id);
+				}
+				var conn = new Ext.data.Connection();
+				conn.request({
+					url: '<?php echo $this->url(array('module' => 'admin', 'controller' => 'index', 'action' => 'postagem-publicar'), null, true); ?>',
+					method: 'POST',
+					params: {
+						'id[]': id
+					},
+					success: function () {
+						Ext.MessageBox.show({
+							title: 'Atenção',
+							msg: 'Os arquivos foram publicados com sucesso',
+							buttons: Ext.MessageBox.OK,
+							fn: function () {
+								store.reload();
+							}
+						});
+					},
+					failure: function () {
+						Ext.MessageBox.show({
+							title: 'Atenção',
+							msg: 'Houve um erro ao publicar os arquivos',
+							buttons: Ext.MessageBox.OK
+						});
+					}
+				});
+			}
+		}, {
+			xtype: 'button',
+			text: 'Despublicar',
+			iconCls: 'silk-unpublish',
+			handler: function () {
+				var arrSelecionados = grid.getSelectionModel().getSelections();
+				var id = new Array();
+				for (var i = 0; i < arrSelecionados.length; i++) {
+					id.push(arrSelecionados[i].id);
+				}
+				var conn = new Ext.data.Connection();
+				conn.request({
+					url: '<?php echo $this->url(array('module' => 'admin', 'controller' => 'index', 'action' => 'postagem-despublicar'), null, true); ?>',
+					method: 'POST',
+					params: {
+						'id[]': id
+					},
+					success: function () {
+						Ext.MessageBox.show({
+							title: 'Atenção',
+							msg: 'Os arquivos foram despublicados com sucesso',
+							buttons: Ext.MessageBox.OK,
+							fn: function () {
+								store.reload();
+							}
+						});
+					},
+					failure: function () {
+						Ext.MessageBox.show({
+							title: 'Atenção',
+							msg: 'Houve um erro ao despublicar os arquivos',
+							buttons: Ext.MessageBox.OK
+						});
+					}
+				});
+			}	
+		}],
+        bbar: new Ext.PagingToolbar({
+            pageSize: store.baseParams.limit,
+            store: store,
+            displayInfo: true
+		})
+    });
+    grid.render('grid-arquivos');
+    store.load();
+});
+<?php $this->headScript()->captureEnd(); ?>
+
+<div id="grid-arquivos"></div>

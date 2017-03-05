@@ -1,0 +1,9 @@
+Parametro:
+  Parametro_1:
+    id: 1
+    nome: 'Título mensagem de aniversário'
+    valor: 'Parabéns'
+  Parametro_2:
+    id: 2
+    nome: 'Mensagem mensagem de aniversário'
+    valor: 'Parabéns Servidor Público'

@@ -1,0 +1,115 @@
+Comprovante:
+  options:
+    collate: utf8_unicode_ci
+    charset: utf8
+  tableName: comprovante
+  columns:
+    id:
+      type: integer(8)
+      unsigned: true
+      primary: true
+      autoincrement: true
+    servidor_publico_id:
+      type: integer(8)
+      unsigned: true
+      notnull: true
+    postagem_id:
+      type: integer(8)
+      unsigned: true
+      notnull: true
+    nome_empresa:
+      type: string(255)
+      notnull: false
+    cnpj:
+      type: string(255)
+      notnull: false
+    nome_funcionario:
+      type: string(255)
+      notnull: false
+    matricula:
+      type: string(255)
+      notnull: false
+    funcao:
+      type: string(255)
+      notnull: false
+    setor:
+      type: string(255)
+      notnull: false
+    mes_referencia:
+      type: string(255)
+      notnull: false
+    data_admissao:
+      type: string(255)
+      notnull: false
+    banco:
+      type: string(255)
+      notnull: false
+    agencia:
+      type: string(255)
+      notnull: false
+    conta_corrente:
+      type: string(255)
+      notnull: false
+    salario_base:
+      type: string(255)
+      notnull: false
+    total_proventos:
+      type: string(255)
+      notnull: false
+    total_descontos:
+      type: string(255)
+      notnull: false
+    liquido:
+      type: string(255)
+      notnull: false
+    f_irrf:
+      type: string(255)
+      notnull: false
+    base_calc_irrf:
+      type: string(255)
+      notnull: false
+    sal_cont_inss:
+      type: string(255)
+      notnull: false
+    base_calc_fgts:
+      type: string(255)
+      notnull: false
+    fgts_mes:
+      type: string(255)
+      notnull: false
+    vinculo:
+      type: string(255)
+      notnull: false
+    categoria_vinculo:
+      type: string(255)
+      notnull: false
+    nivel_salarial:
+      type: string(255)
+      notnull: false
+    cpf:
+      type: string(255)
+      notnull: false
+    salario_hora:
+      type: string(255)
+      notnull: false
+    base_consignados:
+      type: string(255)
+      notnull: false
+    mensagem_1:
+      type: string(255)
+      notnull: false
+    mensagem_2:
+      type: string(255)
+      notnull: false
+    mensagem_3:
+      type: string(255)
+      notnull: false
+  relations:
+    ServidorPublico:
+      local: servidor_publico_id
+      foreign: id
+      type: one
+    Postagem:
+      local: postagem_id
+      foreign: id
+      type: one

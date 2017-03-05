@@ -1,0 +1,64 @@
+<?php $this->headLink()->appendStylesheet($this->baseUrl() . '/css/ext-all.css'); ?>
+<?php $this->headLink()->appendStylesheet($this->baseUrl() . '/css/xtheme-gray.css'); ?>
+<?php $this->headScript()->appendFile($this->baseUrl() . '/js/ext-base.js'); ?>
+<?php $this->headScript()->appendFile($this->baseUrl() . '/js/ext-all.js'); ?>
+<?php $this->headScript()->appendFile($this->baseUrl() . '/js/ext-pt_BR.js'); ?>
+<?php $this->headScript()->appendFile($this->baseUrl() . '/js/datetime.js'); ?>
+<?php $this->headScript()->captureStart(); ?>
+Ext.onReady(function() {
+	Ext.QuickTips.init();
+	Ext.form.Field.prototype.msgTarget = 'side';
+	var form = new Ext.form.FormPanel({
+		url: '<?php echo $this->url(array('module' => 'admin', 'controller' => 'configuracao', 'action' => 'aniversario-data'), null, true); ?>',
+		method: 'GET',
+		renderTo: 'form-aniversario',
+		width: 375,
+		layout: 'form',
+		bodyStyle: 'padding: 5px',
+		title: 'Mensagem de aniversário',
+		defaults: {
+			xtype: 'textfield',
+			width: 238,
+			allowBlank: false
+		},
+		items: [{
+			name: 'titulo',
+			fieldLabel: 'Título'
+		}, {
+			name: 'mensagem',
+			fieldLabel: 'Mensagem'
+		}],
+		bbar: ['->', {
+			xtype: 'button',
+			text: 'Salvar',
+			scope: this,
+			iconCls: 'icon-save',
+			handler: function () {
+				if (!form.form.isValid()) {
+					return false;
+				}
+				form.form.submit({
+					method: 'POST',
+					success: function () {
+						Ext.MessageBox.show({
+							title: 'Atenção',
+							msg: 'Mensagem de aniversário atualizada com sucesso',
+							buttons: Ext.MessageBox.OK
+						});
+					},
+					failure: function () {
+						Ext.MessageBox.show({
+							title: 'Atenção',
+							msg: 'Houve um erro ao atualizar a mensagem de aniversário',
+							buttons: Ext.MessageBox.OK
+						});
+					}
+				});
+			}
+		}]
+	});
+	form.load();
+});
+<?php $this->headScript()->captureEnd(); ?>
+
+<div id="form-aniversario"></div>

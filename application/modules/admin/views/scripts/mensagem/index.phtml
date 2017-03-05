@@ -1,0 +1,243 @@
+<?php $this->headLink()->appendStylesheet($this->baseUrl() . '/css/ext-all.css'); ?>
+<?php $this->headLink()->appendStylesheet($this->baseUrl() . '/css/xtheme-gray.css'); ?>
+<?php $this->headScript()->appendFile($this->baseUrl() . '/js/ext-base.js'); ?>
+<?php $this->headScript()->appendFile($this->baseUrl() . '/js/ext-all.js'); ?>
+<?php $this->headScript()->appendFile($this->baseUrl() . '/js/ext-pt_BR.js'); ?>
+<?php $this->headScript()->appendFile($this->baseUrl() . '/js/datetime.js'); ?>
+<?php $this->headScript()->captureStart(); ?>
+Ext.onReady(function() {
+	Ext.QuickTips.init();
+	Ext.form.Field.prototype.msgTarget = 'side';
+	var FormControl = {
+		msgID: 0,
+		form: new Ext.form.FormPanel({
+			url: '<?php echo $this->url(array('module' => 'admin', 'controller' => 'mensagem', 'action' => 'editar'), null, true); ?>',
+	        baseCls: 'x-plain',
+	        layout: 'form',
+			labelWidth: 130,
+			defaults: {
+				xtype: 'textfield',
+				width: 223
+			},
+	        items: [{
+				name: 'titulo',
+				fieldLabel: 'Título',
+				allowBlank: false
+			}, {
+				name: 'mensagem',
+				fieldLabel: 'Mensagem',
+				xtype: 'textarea',
+				rows: 3,
+				allowBlank: false
+			}, {
+				name: 'data_publicacao',
+				fieldLabel: 'Data de Publicação',
+				allowBlank: false,
+				xtype: 'xdatetime',
+				dateFormat: 'd/m/Y',
+				timeFormat: 'H:i',
+				id: 'data_publicacao'
+			}, {
+				name: 'data_expiracao',
+				fieldLabel: 'Data de Expiração',
+				allowBlank: true,
+				xtype: 'xdatetime',
+				dateFormat: 'd/m/Y',
+				timeFormat: 'H:i'
+			}, {
+				name: 'fl_publicada',
+				fieldLabel: 'Publicada',
+				xtype: 'checkbox',
+				boxLabel: 'Sim'
+			}, {
+				name: 'fl_ativos',
+				fieldLabel: 'Ativos',
+				xtype: 'checkbox',
+				boxLabel: 'Sim'
+			}, {
+				name: 'fl_inativos',
+				fieldLabel: 'Inativos',
+				xtype: 'checkbox',
+				boxLabel: 'Sim'
+			}]
+		}),
+		panel: new Ext.Window({
+			title: 'Mensagem',
+	        width: 400,
+	        height: 300,
+			resizable: false,
+			draggable: false,
+	        layout: 'fit',
+	        bodyStyle: 'padding: 5px;',
+	        buttonAlign: 'center',
+	        items: [],
+	        buttons: [{
+	            text: 'Salvar',
+				handler: function () {
+					if (!FormControl.form.form.isValid()) {
+						Ext.MessageBox.show({
+							title: 'Atenção',
+							msg: 'Preencha todos os campos',
+							buttons: Ext.MessageBox.OK
+						});
+						return false;
+					}
+					FormControl.form.form.submit({
+						params:{
+							id: FormControl.msgID
+						},
+						success: function () {
+							Ext.MessageBox.show({
+								title: 'Atenção',
+								msg: 'Mensagem salva com sucesso',
+								buttons: Ext.MessageBox.OK,
+								fn: function () {
+									FormControl.panel.hide();
+									grid.store.reload();
+								}
+							});
+						},
+						failure: function () {
+							Ext.MessageBox.show({
+								title: 'Atenção',
+								msg: 'Houve um erro ao salvar a mensagem',
+								buttons: Ext.MessageBox.OK
+							});
+						}
+					});
+				}
+	        }, {
+	            text: 'Cancelar',
+				scope: this,
+				handler: function () {
+					FormControl.panel.hide();
+					FormControl.msgID = 0;
+					FormControl.form.form.reset();
+				}
+	        }]
+		}),
+		show: function (title, id) {
+			this.msgID = id;
+			this.panel.title = title;
+			this.panel.show();
+			if (id == 0) {
+				this.form.form.reset();
+				Ext.getCmp('data_publicacao').setValue(new Date());
+			} else {
+				this.form.form.load({
+					url: '<?php echo $this->url(array('module' => 'admin', 'controller' => 'mensagem', 'action' => 'editar'), null, true); ?>',
+					waitMsg: 'Carregando',
+					method: 'GET',
+					params: {
+						'id': id
+					}
+				});
+			}
+		}
+	};
+	FormControl.panel.add(FormControl.form);
+	var store = new Ext.data.JsonStore({
+		url: '<?php echo $this->url(array('module' => 'admin', 'controller' => 'mensagem', 'action' => 'list'), null, true); ?>',
+		root: 'data',
+		idProperty: 'id',
+		totalProperty: 'total',
+		autoLoad: true,
+		autoDestroy: true,
+		remoteSort: true,
+		sortInfo: {
+			field: 'id',
+			direction: 'DESC'
+		},
+		baseParams: {
+			limit: 20
+		},
+		fields: [
+			{name: 'id', type: 'int'},
+			{name: 'usuario', type: 'string'},
+			{name: 'titulo', type: 'string'},
+			{name: 'mensagem', type: 'string'},
+			{name: 'data_criacao', type: 'string'},
+			{name: 'data_publicacao', type: 'string'},
+			{name: 'data_expiracao', type: 'string'},
+			{name: 'fl_publicada', type: 'string'},
+			{name: 'fl_ativos', type: 'string'},
+			{name: 'fl_inativos', type: 'string'}
+		]
+	});
+	var yesnoRenderer = function (e) {
+		if (e == 'true') {
+			return '<center><img src="<?php echo $this->baseUrl(); ?>/images/default/dd/drop-yes.gif" alt="Sim" title="Sim" /></center>';
+		} else {
+			return '<center><img src="<?php echo $this->baseUrl(); ?>/images/default/dd/drop-no.gif" alt="Não" title="Não" /></center>';
+		}
+	};
+    var grid = new Ext.grid.GridPanel({
+        store: store,
+        columns: [
+			{id: 'id', header: 'ID', width: 40, sortable: false, dataIndex: 'id'},
+			{id: 'usuario', header: 'Usuário', width: 90, sortable: false, dataIndex: 'usuario'},
+			{id: 'titulo', header: 'Título', width: 90, sortable: false, dataIndex: 'titulo'},
+			{id: 'mensagem', header: 'Mensagem', width: 200, sortable: false, dataIndex: 'mensagem'},
+			{id: 'data_criacao', header: 'Data Criação', width: 120, sortable: false, dataIndex: 'data_criacao'},
+			{id: 'data_publicacao', header: 'Data Publicação', width: 120, sortable: false, dataIndex: 'data_publicacao'},
+			{id: 'data_expiracao', header: 'Data Expiração', width: 120, sortable: false, dataIndex: 'data_expiracao'},
+			{id: 'fl_publicada', header: 'Publicada', width: 60, sortable: false, dataIndex: 'fl_publicada', renderer: yesnoRenderer},
+			{id: 'fl_ativos', header: 'Ativos', width: 40, sortable: false, dataIndex: 'fl_ativos', renderer: yesnoRenderer},
+			{id: 'fl_inativos', header: 'Inativos', width: 50, sortable: false, dataIndex: 'fl_inativos', renderer: yesnoRenderer}
+        ],
+        stripeRows: true,
+        height: 320,
+        width: '100%',
+        frame: true,
+        title: 'Mensagens',
+		listeners: {
+			rowdblclick: function (a, b) {
+				FormControl.show('Editar mensagem', store.data.items[b].id);
+			}
+		},
+		tbar: ['->', {
+			xtype: 'button',
+			text: 'Adicionar',
+			iconCls: 'silk-add',
+			handler: function () {
+				FormControl.show('Adicionar mensagem', 0);
+			}
+		}, {
+			xtype: 'button',
+			text: 'Excluir',
+			iconCls: 'silk-delete',
+			handler: function () {
+				var seld = grid.getSelectionModel().getSelections();
+				if (seld.length != 1) {
+					alert('Selecione uma mensagem para excluir');
+					return false;
+				}
+				var conn = new Ext.data.Connection();
+				conn.request({
+					url: '<?php echo $this->url(array('module' => 'admin', 'controller' => 'mensagem', 'action' => 'deletar'), null, true); ?>',
+					params: {
+						'id': seld[0].id
+					},
+					success: function () {
+						alert('ok');
+						store.reload();
+					},
+					failure: function () {
+						alert('deu erro');
+						store.reload();
+					}
+				});
+			}
+		}],
+        bbar: new Ext.PagingToolbar({
+            pageSize: store.baseParams.limit,
+            store: store,
+            displayInfo: true
+		})
+    });
+    grid.render('grid-mensagens');
+    store.load();
+});
+<?php $this->headScript()->captureEnd(); ?>
+
+<div id="grid-mensagens"></div>

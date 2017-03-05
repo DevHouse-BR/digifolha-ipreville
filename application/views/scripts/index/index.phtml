@@ -1,0 +1,142 @@
+<?php if ($this->aniversario): ?>
+
+<div id="aniversario">
+		<div class="aniversario_top">
+			<div class="aniversario_btn">
+			<div class="gift">
+			<h3><?php echo DMG_Config::_(1); ?></h3>
+			<p><?php echo DMG_Config::_(2); ?></p></div>
+		</div>
+	</div>
+</div>
+
+<?php endif; ?>
+
+<?php $this->headScript()->appendFile($this->baseUrl() . '/js/jquery-1.4.2.min.js'); ?>
+<?php $this->headScript()->appendFile($this->baseUrl() . '/js/jqModal.js'); ?>
+<?php $this->headLink()->appendStylesheet($this->baseUrl() . '/css/jqModal.css'); ?>
+<?php $this->headScript()->captureStart(); ?>
+$(document).ready(function() {
+	$('#mensagens li').each(function(a){
+		var id = '#' + $(this).children('div.jqmAlert').attr('id');
+		var id2 = id.split('_');
+		id2 = id2[1];
+		$(id).jqm({
+			trigger: $(this).children('a.abrir'),
+			target: id + ' div.jqmAlertContent',
+			overlay: 80,
+			onShow: function (h) {
+				$.ajax({
+					type: 'post',
+					url: '<?php echo $this->url(array('module' => 'default', 'controller' => 'index', 'action' => 'marcar-lida'), null, true); ?>',
+					data: {'id': id2},
+					success: function (data) {
+						if (data.success) {
+							$(id).parent().removeClass('naolida');
+							$(id).parent().addClass('lida');
+							$(id + ' div.jqmAlertContent a.marcar').text("Marcar como não lida")
+						}
+					},
+					dataType: 'json'
+				});
+				h.w.show();
+			}
+		});
+		$(id + ' a.marcar').live('click', function(a){
+			if ($(id).parent().hasClass('lida')) {
+				$.ajax({
+					type: 'post',
+					url: '<?php echo $this->url(array('module' => 'default', 'controller' => 'index', 'action' => 'marcar-nao-lida'), null, true); ?>',
+					data: {'id': id2},
+					success: function (data) {
+						if (data.success) {
+							$(id).parent().removeClass('lida');
+							$(id).parent().addClass('naolida');
+							$(id + ' div.jqmAlertContent a.marcar').text("Marcar como lida")
+						}
+					},
+					dataType: 'json'
+				});
+			} else {
+				$.ajax({
+					type: 'post',
+					url: '<?php echo $this->url(array('module' => 'default', 'controller' => 'index', 'action' => 'marcar-lida'), null, true); ?>',
+					data: {'id': id2},
+					success: function (data) {
+						if (data.success) {
+							$(id).parent().removeClass('naolida');
+							$(id).parent().addClass('lida');
+							$(id + ' div.jqmAlertContent a.marcar').text("Marcar como não lida")
+						}
+					},
+					dataType: 'json'
+				});
+			}
+		});
+	});
+	if ($.browser.msie) {
+		$('div.jqmAlert .jqmClose').hover(function() {
+			$(this).addClass('jqmCloseHover');
+		}, function() {
+			$(this).removeClass('jqmCloseHover');
+		});
+	}
+});
+<?php $this->headScript()->captureEnd(); ?>
+<div id="comprovantes">
+<div id="msgs_btn">
+<h3> Comprovantes</h3>
+<?php if (count($this->comprovantes)): ?>
+	<table border="0" width="100%">
+		<thead>
+			<tr class="comprovante_h">
+				<th class="mes">Mês</th>
+				<th class="print">Imprimir</th>
+			</tr>
+		</thead>
+		<tbody>
+<?php foreach ($this->comprovantes as $k): ?>
+			<tr>
+				<td class="mes"><?php echo $k->referencia; ?></td>
+				<td class="print"><a href="<?php echo $this->url(array('module' => 'default', 'controller' => 'index', 'action' => 'visualizar', 'id' => $k->id), null, true); ?>"><img src="<?php echo $this->baseUrl(); ?>/images/icons/print.png" alt="" title="" /></a></td>
+			</tr>
+<?php endforeach; ?>
+		</tbody>
+	</table>
+<?php else: ?>
+	<p>Nenhum comprovante disponível.</p>
+<?php endif; ?>
+</div>
+</div>
+<div id="mensagens">
+<div id="msgs_btn">
+<h3>Mensagens</h3>
+<?php if (count($this->mensagens)): ?>
+	<ul>
+<?php foreach ($this->mensagens as $k): ?>
+		<li class="<?php echo ($k->lida ? 'lida' : 'naolida'); ?>">
+			<a class="abrir" href="#"><?php echo $k->titulo; ?></a>
+			<span class="data"><?php echo $k->data_publicacao; ?></span>
+			<div class="jqmAlert" id="mensagem_<?php echo $k->id; ?>">
+				<div id="mensagem_<?php echo $k->id; ?>" class="jqmAlertWindow">
+					<div class="jqmAlertTitle clearfix">
+						<h1><?php echo $k->titulo; ?></h1><a href="#" class="jqmClose"><em>Fechar</em></a>
+					</div>
+					<div class="jqmAlertContent">
+						<p class="mensagem"><?php echo $k->mensagem; ?></p>
+						<p class="data"><?php echo $k->data_publicacao; ?></p>
+						<a href="#" class="marcar">Marcar como <?php echo (!$k->lida ? 'lida' : 'não lida'); ?></a>
+					</div>
+				</div>
+			</div>
+		</li>
+<?php endforeach; ?>
+	</ul>
+<?php else: ?>
+	<p>Nenhuma mensagem disponível.</p>
+<?php endif; ?>
+</div>
+</div>
+<div id="msg_downloadPdf">
+	Para visualizar seu comprovante é necesario ter um visualizador de PDF instalado em seu computador. Se você precisar instalar um, <a href="../files/FoxitReader331_enu_Setup.exe" target="_blank">clique aqui</a>.
+</div>

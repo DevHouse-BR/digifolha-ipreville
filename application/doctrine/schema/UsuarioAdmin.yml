@@ -1,0 +1,25 @@
+UsuarioAdmin:
+  options:
+    collate: utf8_unicode_ci
+    charset: utf8
+  tableName: usuario_admin
+  columns:
+    id:
+      type: integer(4)
+      unsigned: true
+      primary: true
+      autoincrement: true
+    nome:
+      type: string(255)
+      notnull: true
+    login:
+      type: string(255)
+      notnull: true
+    senha:
+      type: string(255)
+      notnull: true
+  relations:
+    Mensagem:
+      local: id
+      foreign: usuario_admin_id
+      type: many

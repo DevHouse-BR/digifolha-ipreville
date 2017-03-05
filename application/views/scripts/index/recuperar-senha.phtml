@@ -1,0 +1,10 @@
+<div id="msgs_btn">
+	<h3>Lembrar senha</h3>
+</div>
+<?php echo $this->form; ?>
+<?php if (count($this->messages)): ?>
+<p class="erro"><?php echo $this->messages[0]; ?></p>
+<?php endif; ?>
+<p align="center">
+Sua senha ser&aacute; enviada para seu e-mail. Se voc&ecirc; trocou de e-mail, <a href="<?php echo $this->url(array('module' => 'default', 'controller' => 'index', 'action' => 'contato'), null, true); ?>" class="login_links">clique aqui</a> e informe seu novo endere&ccedil;o de e-mail</p>
+<a href="<?php echo $this->url(array('module' => 'default', 'controller' => 'index', 'action' => 'login'), null, true); ?>" class="login_links">Voltar</a>

@@ -1,0 +1,29 @@
+PostagemLog:
+  options:
+    collate: utf8_unicode_ci
+    charset: utf8
+  tableName: postagem_log
+  columns:
+    id:
+      type: integer(4)
+      unsigned: true
+      primary: true
+      autoincrement: true
+    postagem_id:
+      type: integer(8)
+      unsigned: true
+      notnull: true
+    dt_log:
+      type: timestamp
+      notnull: true
+    mensagem:
+      type: varchar(255)
+      notnull: true
+    tipo:
+      type: varchar(1)
+      notnull: true
+  relations:
+    Postagem:
+      local: postagem_id
+      foreign: id
+      type: one

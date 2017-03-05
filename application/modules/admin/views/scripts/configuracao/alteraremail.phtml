@@ -1,0 +1,26 @@
+<?php echo $this->erroInc; ?>
+<?php echo $this->confAutEmail; ?>
+<?php echo $this->form; ?>
+<?php echo $this->servAtualizar; ?>
+
+<?php if (count($this->messages)): ?>
+<p class="erro"><?php echo $this->messages[0]; ?></p>
+<?php endif; ?>
+<script language="javascript">
+	function fcn_alteraEmail(){
+		document.getElementById("cadastrar").value = 1;
+		document.getElementById("form_zend").submit();
+	}
+	
+	function fcn_confirmaEmail(){
+		document.getElementById("confirmaAut").value = 1;
+		document.getElementById("cadastrar").value = 1;
+		document.getElementById("form_zend").submit();
+	}
+	
+	function fcn_cancelaEmail(){
+		document.getElementById("confirmaAut").value = 0;
+		document.getElementById("cadastrar").value = 0;
+		document.getElementById("form_zend").submit();
+	}
+</script>
